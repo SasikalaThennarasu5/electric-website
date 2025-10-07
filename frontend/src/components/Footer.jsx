@@ -1,55 +1,195 @@
-import React, { useEffect, useState } from "react";
-import api from "../api";
+import React from "react";
+import { Link } from "react-router-dom";
+import logo from "../assets/images/logo.png";
+import igIcon from "../assets/images/instagram.png";
+import gIcon from "../assets/images/google.png";
+import locIcon from "../assets/images/location.png";
+import phoneIcon from "../assets/images/phone.png";
+import mailIcon from "../assets/images/mail.png";
 
 export default function Footer() {
-  const [data, setData] = useState({ sections: [], contact: {} });
-
-  useEffect(() => {
-    api.get("footer/")
-      .then((res) => setData(res.data))
-      .catch(console.error);
-  }, []);
-
   return (
-    <footer className="bg-orange-600 text-white mt-8">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-6 p-8">
-        <div>
-           <div className="w-36">
-              {data.logo?.image ? (
-                <img src={data.logo.image} alt={data.logo.alt_text || "logo"} />
-              ) : (
-                <div className="text-orange-600 font-semibold">Electric dreams</div>
-              )}
-            </div>
-           <h3 className="font-semibold mb-4">Electric dreams</h3> 
-          <p className="max-w-xs">
-            Voltaic Electrical provides expert residential, commercial, and emergency electrical services across region.
-          </p>
-        </div>
+    <footer className="bg-[#E25C26] text-white">
+      <div className="mx-auto px-6 md:px-12 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+          {/* Brand / Description */}
+          <div>
+            <img
+              src={logo}
+              alt="Electric dreams logo"
+              className="h-14 w-auto mb-6"
+            />
+            <p className="text-sm md:text-base font-semibold max-w-xs">
+              Voltaic Electrical provides expert residential, commercial, and
+              emergency electrical services across Perth.
+            </p>
 
-        {data.sections?.map((sec, idx) => (
-          <div key={idx}>
-            <h4 className="font-semibold mb-2">{sec.title}</h4>
-            <ul>
-              {sec.links?.map((l, i) => (
-                <li key={i}>
-                  <a href={l.url || "#"} className="block py-1">
-                    {l.title}
-                  </a>
-                </li>
-              ))}
+            <div className="flex items-center gap-4 mt-6">
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+              >
+                <img
+                  src={igIcon}
+                  alt="Instagram"
+                  className="h-8 w-8 object-contain"
+                />
+              </a>
+              <a
+                href="https://maps.google.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Google"
+              >
+                <img
+                  src={gIcon}
+                  alt="Google"
+                  className="h-8 w-8 object-contain"
+                />
+              </a>
+            </div>
+          </div>
+
+          {/* Services column */}
+          <div>
+            <h3 className="text-xl md:text-2xl font-bold mb-6">Services</h3>
+            <ul className="space-y-1 font-semibold">
+              <li className="text-sm md:text-base">
+                <Link to="/services/lighting" className="hover:underline">
+                  Lighting
+                </Link>
+              </li>
+              <li className="text-sm md:text-base">
+                <Link
+                  to="/services/private-power-poles"
+                  className="hover:underline"
+                >
+                  Private Power Poles
+                </Link>
+              </li>
+              <li className="text-sm md:text-base">
+                <Link
+                  to="/services/smoke-alarms"
+                  className="hover:underline"
+                >
+                  Smoke Alarms
+                </Link>
+              </li>
+              <li className="text-sm md:text-base">
+                <Link
+                  to="/services/ev-chargers"
+                  className="hover:underline"
+                >
+                  EV Chargers
+                </Link>
+              </li>
+              <li className="text-sm md:text-base">
+                <Link
+                  to="/services/air-conditioning"
+                  className="hover:underline"
+                >
+                  Air Conditioning
+                </Link>
+              </li>
+              <li className="text-sm md:text-base">
+                <Link
+                  to="/services/thermographic-imaging"
+                  className="hover:underline"
+                >
+                  Thermographic Imaging
+                </Link>
+              </li>
+              <li className="text-sm md:text-base">
+                <Link to="/services" className="hover:underline">
+                  View All
+                </Link>
+              </li>
             </ul>
           </div>
-        ))}
 
-        {/* <div>
-          <h4 className="font-semibold mb-2">Get in Touch</h4>
-          <div className="space-y-2">
-            <div>{data.contact.location}</div>
-            <div>{data.contact.phone}</div>
-            <div>{data.contact.email}</div>
-          </div> 
-        </div>*/}
+          {/* Company column */}
+          <div>
+            <h3 className="text-xl md:text-2xl font-bold mb-6">Company</h3>
+            <ul className="space-y-1 font-semibold">
+              <li className="text-sm md:text-base">
+                <Link to="/about" className="hover:underline">
+                  About
+                </Link>
+              </li>
+              <li className="text-sm md:text-base">
+                <Link to="/areas" className="hover:underline">
+                  Service Areas
+                </Link>
+              </li>
+              <li className="text-sm md:text-base">
+                <Link to="/contact" className="hover:underline">
+                  Contact
+                </Link>
+              </li>
+              <li className="text-sm md:text-base">
+                <Link to="/reviews" className="hover:underline">
+                  Reviews
+                </Link>
+              </li>
+              <li className="text-sm md:text-base">
+                <Link to="/resources" className="hover:underline">
+                  Resources
+                </Link>
+              </li>
+              <li className="text-sm md:text-base">
+                <Link to="/sitemap" className="hover:underline">
+                  Sitemap
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Get in Touch */}
+          <div>
+            <h3 className="text-xl md:text-2xl font-bold mb-6">Get in Touch</h3>
+
+            <div className="flex items-start gap-3 mb-2">
+              <img
+                src={locIcon}
+                alt="Location"
+                className="h-5 w-5 mt-1 object-contain"
+              />
+              <div className="text-sm md:text-base font-semibold">
+                Location, Chennai
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3 mb-2">
+              <img
+                src={phoneIcon}
+                alt="Phone"
+                className="h-5 w-5 mt-1 object-contain"
+              />
+              <a
+                href="tel:+911234567890"
+                className="text-sm md:text-base font-semibold"
+              >
+                (+91)1234567890
+              </a>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <img
+                src={mailIcon}
+                alt="Mail"
+                className="h-5 w-5 mt-1 object-contain"
+              />
+              <a
+                href="mailto:Support@electricdreams.com"
+                className="text-sm md:text-base font-semibold"
+              >
+                Support@electricdreams.com
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </footer>
   );
